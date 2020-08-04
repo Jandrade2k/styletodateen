@@ -14,9 +14,12 @@ io.on('connection', box => {
     socket.join(box)
 })
 
+// user: database
+// password: admin
+
 // TODO: Inserir endereço do banco de dados.
 
-// mongoose.connect('');
+mongoose.connect('mongodb+srv://database:admin@loja.usiri.gcp.mongodb.net/database?retryWrites=true&w=majority');
 
 app.use((req, res, next) => {
     req.io = io;
@@ -24,7 +27,7 @@ app.use((req, res, next) => {
     return next();
 })
 
-app.use(express,json());
+app.use(express.json());
 app.use(express.urlencoded({extend: true}));
 app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')))
 
